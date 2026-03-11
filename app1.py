@@ -10,27 +10,40 @@ page = st.sidebar.radio("Go to:", ["Home","Diary", "Planner", "About"])
 # -- Home Page --
 if page == "Home":
     st.title("🎓 Welcome to the Student Planner App 🎓")
-    st.header("An entry a day keeps the stress away. How are you doing, soldier?")
-    
+    st.subheader("✨ An entry a day keeps the stress away ✨")
+
     quotes = [
         '"Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle." - Christian D. Larson',
         '"It does not matter how slowly you go, as long as you do not stop." - Confucius',
-        '"Study while others are sleeping; work while others are loafing; prepare while others are playing; and dream while others are wishing." - William Arthur Ward', 
+        '"Study while others are sleeping; work while others are loafing; prepare while others are playing; and dream while others are wishing." - William Arthur Ward',
         '"You do not have to be great to start, but you have to start to be great." - Zig Ziglar',
-        '"The difference between a successful person and others is not a lack of strength, not a lack of knowledge, but rather a lack of will." - Vince Lombardi', 
-        '"You are never too old to set another goal or to dream a new dream." - C.S. Lewis', 
-        '"Success is not the absence of failure; it is the persistence through failure." - Aisha Tyler', 
-        '"The best way to predict your future is to create it." - Abraham Lincoln', 
-        '"Efforts and courage are not enough without purpose and direction." - John F. Kennedy', 
-        '"Procrastination is the thief of time." - Edward Young', 
-        '"Real difficulties can be overcome; it is only the imaginary ones that are unconquerable." - Theodore N. Vail', 
-        '"Nothing is impossible. The word itself says ‘I’m Possible’." - Audrey Hepburn',
+        '"The difference between a successful person and others is not a lack of strength, not a lack of knowledge, but rather a lack of will." - Vince Lombardi',
+        '"You are never too old to set another goal or to dream a new dream." - C.S. Lewis',
+        '"Success is not the absence of failure; it is the persistence through failure." - Aisha Tyler',
+        '"The best way to predict your future is to create it." - Abraham Lincoln',
+        '"Efforts and courage are not enough without purpose and direction." - John F. Kennedy',
+        '"Procrastination is the thief of time." - Edward Young',
+        '"Real difficulties can be overcome; it is only the imaginary ones that are unconquerable." - Theodore N. Vail',
+        '"Nothing is impossible. The word itself says \'I\'m Possible\'." - Audrey Hepburn',
         '"The greatest amount of wasted time is time not getting started." - Dawson Trotman',
         '"Work hard in silence. Let your success be your noise." - Frank Ocean',
-        '"Education is the most powerful weapon which you can use to change the world." - Nelson Mandela'  
+        '"Education is the most powerful weapon which you can use to change the world." - Nelson Mandela'
     ]
-    if st.button("Click the button below to generate a random motivational quote!"):
-        st.success(random.choice(quotes))
+
+    # Layout with two columns
+    col1, col2 = st.columns([2,1])
+
+    with col1:
+        st.header("💡 Random Quote of the Day 💡")
+        if st.button("✨ Inspire Me! ✨"):
+            st.info(random.choice(quotes))
+
+    with col2:
+        st.header("📌 Quick Links")
+        st.write("📖 Go to Diary")
+        st.write("📅 Go to Planner")
+        st.write("ℹ️ About this App")
+
 
 # -- Diary Page --
 if page == "Diary":
