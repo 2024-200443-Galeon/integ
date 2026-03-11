@@ -63,35 +63,28 @@ elif st.session_state.page == "Diary":
     if "diary_entries" not in st.session_state:
         st.session_state.diary_entries = []
 
-    # Initialize form state only if not yet set
-    for key, default in {
-        "diary_title": "",
-        "diary_entry": "",
-        "diary_date": datetime.date.today()
-    }.items():
-        if key not in st.session_state:
-            st.session_state[key] = default
-
-    # Inputs bound to session_state
-    title = st.text_input("Diary Title", value=st.session_state.diary_title, key="diary_title")
-    date = st.date_input("Entry Date", value=st.session_state.diary_date, key="diary_date")
-    entry = st.text_area("Write your diary entry here:", value=st.session_state.diary_entry, key="diary_entry")
+    # Inputs (no manual value binding)
+    st.text_input("Diary Title", key="diary_title")
+    st.date_input("Entry Date", key="diary_date", value=datetime.date.today())
+    st.text_area("Write your diary entry here:", key="diary_entry")
 
     # Save button
     if st.button("Save Entry"):
         new_entry = {
-            "Date": str(date),
-            "Title": title,
-            "Entry": entry
+            "Date": str(st.session_state.diary_date),
+            "Title": st.session_state.diary_title,
+            "Entry": st.session_state.diary_entry
         }
         st.session_state.diary_entries.append(new_entry)
         st.success("✅ Entry saved!")
 
-    # Create new entry button (resets fields)
+    # Create new entry button (safe reset)
     if st.button("➕ Create New Entry"):
-        st.session_state.diary_title = ""
-        st.session_state.diary_entry = ""
-        st.session_state.diary_date = datetime.date.today()
+        st.session_state.update({
+            "diary_title": "",
+            "diary_entry": "",
+            "diary_date": datetime.date.today()
+        })
 
     # Show past entries
     if st.session_state.diary_entries:
