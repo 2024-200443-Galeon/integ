@@ -8,7 +8,10 @@ if "page" not in st.session_state:
     st.session_state.page = "Home"
 
 st.sidebar.title("MENU")
-choice = st.sidebar.radio("Go to:", ["Home","Diary", "Planner", "About"], index=["Home","Diary","Planner","About"].index(st.session_state.page))
+st.session_state.page = st.sidebar.radio(
+    "Go to:", ["Home","Diary", "Planner", "About"], 
+    index=["Home","Diary","Planner","About"].index(st.session_state.page)
+)
 
 # -- Home Page --
 if st.session_state.page == "Home":
