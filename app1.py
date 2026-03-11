@@ -63,33 +63,29 @@ elif st.session_state.page == "Diary":
     if "diary_entries" not in st.session_state:
         st.session_state.diary_entries = []
 
-    # Inputs (no manual value binding)
-    st.text_input("Diary Title", key="diary_title")
-    st.date_input("Entry Date", key="diary_date", value=datetime.date.today())
-    st.text_area("Write your diary entry here:", key="diary_entry")
+    # Inputs
+    title = st.text_input("Diary Title")
+    date = st.date_input("Entry Date", datetime.date.today())
+    entry = st.text_area("Write your diary entry here:")
+
+    # Note for users
+    st.caption("⚠️ Tip: Erase the words above to add a new entry.")
 
     # Save button
     if st.button("Save Entry"):
         new_entry = {
-            "Date": str(st.session_state.diary_date),
-            "Title": st.session_state.diary_title,
-            "Entry": st.session_state.diary_entry
+            "Date": str(date),
+            "Title": title,
+            "Entry": entry
         }
         st.session_state.diary_entries.append(new_entry)
         st.success("✅ Entry saved!")
-
-    # Create new entry button (safe reset)
-    if st.button("➕ Create New Entry"):
-        st.session_state.update({
-            "diary_title": "",
-            "diary_entry": "",
-            "diary_date": datetime.date.today()
-        })
 
     # Show past entries
     if st.session_state.diary_entries:
         st.subheader("Past Entries")
         diary_data = pd.DataFrame(st.session_state.diary_entries)
+        diary_data.index = diary_data.index + 1  # start numbering at 1
         st.dataframe(diary_data)
     else:
         st.info("No diary entries yet. Start writing! 😎")
