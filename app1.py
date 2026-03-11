@@ -95,39 +95,6 @@ elif st.session_state.page == "Diary":
 elif st.session_state.page == "Planner":
     st.title("📅 Student Planner")
 
-    # Tabs for planner features
-    tab1, tab2, tab3 = st.tabs(["Add Task", "View Progress", "Notes"])
-
-    with tab1:
-        st.header("Add a New Task")
-        st.text_input("Task name")
-        st.date_input("Deadline")
-        st.time_input("Time")
-        st.text_area("Notes")
-        st.radio("Priority", ["Low", "Medium", "High"])
-        st.slider("Estimated hours", 0, 10, 1)
-        st.checkbox("Mark as important")
-        st.button("Save Task")
-
-    with tab2:
-        st.header("Progress Overview")
-        st.progress(40)
-        st.metric("Tasks Completed", 3, delta=+1)
-        st.metric("Pending Tasks", 5, delta=-2)
-        st.table({"Task": ["Essay", "Lab Report"], "Status": ["Done", "Pending"]})
-
-    with tab3:
-        st.header("Notes Section")
-        st.text_area("Write your planner notes here:")
-        st.multiselect("Tag notes with subjects", ["Math", "English", "Science"])
-        st.number_input("Daily study goal (hours)", min_value=0, max_value=24, value=2)
-        st.color_picker("Highlight Color", "#00f900")
-
-
-# -- Planner Page --
-elif st.session_state.page == "Planner":
-    st.title("📅 Student Planner")
-
     # Initialize task storage
     if "tasks" not in st.session_state:
         st.session_state.tasks = []
