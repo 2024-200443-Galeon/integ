@@ -164,11 +164,11 @@ elif st.session_state.page == "Planner":
 # -- About Page --
 elif st.session_state.page == "About":
     st.title("ℹ️ About this App ℹ️")
-    st.write(f"""
+    st.write("""
         About the Student Planner App
         The Student Planner App is an all‑in‑one diary and planner designed to help students organize their school life and reflect on their daily experiences. It combines a personal diary with a task manager, plus motivational quotes to brighten up the day.
-            - Use‑case: The app supports both emotional well‑being (through diary entries) and academic productivity (through task planning and progress tracking).
-            - Target users: Students who want a simple, interactive way to record their thoughts, track assignments, and monitor progress.
+        - Use‑case: The app supports both emotional well‑being (through diary entries) and academic productivity (through task planning and progress tracking).
+        - Target users: Students who want a simple, interactive way to record their thoughts, track assignments, and monitor progress.
         
         - Inputs collected
             - Diary: Title, entry date, and diary content.
