@@ -4,11 +4,14 @@ import datetime
 import random
 
 # -- Sidebar navigation --
+if "page" not in st.session_state:
+    st.session_state.page = "Home"
+
 st.sidebar.title("MENU")
-page = st.sidebar.radio("Go to:", ["Home","Diary", "Planner", "About"])
+choice = st.sidebar.radio("Go to:", ["Home","Diary", "Planner", "About"], index=["Home","Diary","Planner","About"].index(st.session_state.page))
 
 # -- Home Page --
-if page == "Home":
+if st.session_state.page == "Home":
     st.title("🎓 Welcome to the Student Planner App 🎓")
     st.subheader("✨ Every entry is a step forward ✨")
 
@@ -52,7 +55,7 @@ if page == "Home":
 
 
 # -- Diary Page --
-if page == "Diary":
+if st.session_state.page == "Diary":
     st.title("📖 Daily Diary 📖")
     st.text_input("Diary Title")
     st.date_input("Entry Date", datetime.date.today())
@@ -70,7 +73,7 @@ if page == "Diary":
     st.dataframe(diary_data)
 
 # -- Planner Page --
-elif page == "Planner":
+elif st.session_state.page == "Planner":
     st.title("📅 Student Planner")
 
     # Tabs for planner features
