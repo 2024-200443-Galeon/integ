@@ -58,20 +58,35 @@ if st.session_state.page == "Home":
 # -- Diary Page --
 elif st.session_state.page == "Diary":
     st.title("📖 Daily Diary 📖")
-    st.text_input("Diary Title")
-    st.date_input("Entry Date", datetime.date.today())
-    st.text_area("Write your diary entry here:")
-    st.checkbox("Mark as private")
-    st.button("Save Entry")
 
-    # Example table of diary entries
-    diary_data = pd.DataFrame({
-        "Date": ["2026-03-10", "2026-03-11"],
-        "Title": ["Math Review", "Group Meeting"],
-        "Entry": ["Studied probability", "Prepared slides"]
-    })
-    st.subheader("Past Entries")
-    st.dataframe(diary_data)
+    # Initialize diary storage if not yet created
+    if "diary_entries" not in st.session_state:
+        st.session_state.diary_entries = []
+
+    # Inputs
+    title = st.text_input("Diary Title")
+    date = st.date_input("Entry Date", datetime.date.today())
+    entry = st.text_area("Write your diary entry here:")
+    private = st.checkbox("Mark as private")
+
+    # Save button
+    if st.button("Save Entry"):
+        new_entry = {
+            "Date": str(date),
+            "Title": title,
+            "Entry": entry,
+        }
+        st.session_state.diary_entries.append(new_entry)
+        st.success("✅ Entry saved!")
+
+    # Show past entries if any
+    if st.session_state.diary_entries:
+        st.subheader("Past Entries")
+        diary_data = pd.DataFrame(st.session_state.diary_entries)
+        st.dataframe(diary_data)
+    else:
+        st.info("No diary entries yet. Start writing! 😎")
+
 
 # -- Planner Page --
 elif st.session_state.page == "Planner":
