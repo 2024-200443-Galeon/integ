@@ -59,27 +59,40 @@ if st.session_state.page == "Home":
 elif st.session_state.page == "Diary":
     st.title("📖 Daily Diary 📖")
 
-    # Initialize diary storage if not yet created
+    # Initialize diary storage
     if "diary_entries" not in st.session_state:
         st.session_state.diary_entries = []
 
-    # Inputs
-    title = st.text_input("Diary Title")
-    date = st.date_input("Entry Date", datetime.date.today())
-    entry = st.text_area("Write your diary entry here:")
-    private = st.checkbox("Mark as private")
+    # Initialize form state
+    if "diary_title" not in st.session_state:
+        st.session_state.diary_title = ""
+    if "diary_entry" not in st.session_state:
+        st.session_state.diary_entry = ""
+    if "diary_date" not in st.session_state:
+        st.session_state.diary_date = datetime.date.today()
+
+    # Inputs bound to session_state
+    title = st.text_input("Diary Title", value=st.session_state.diary_title, key="diary_title")
+    date = st.date_input("Entry Date", value=st.session_state.diary_date, key="diary_date")
+    entry = st.text_area("Write your diary entry here:", value=st.session_state.diary_entry, key="diary_entry")
 
     # Save button
     if st.button("Save Entry"):
         new_entry = {
             "Date": str(date),
             "Title": title,
-            "Entry": entry,
+            "Entry": entry
         }
         st.session_state.diary_entries.append(new_entry)
         st.success("✅ Entry saved!")
 
-    # Show past entries if any
+    # Create new entry button (resets fields)
+    if st.button("➕ Create New Entry"):
+        st.session_state.diary_title = ""
+        st.session_state.diary_entry = ""
+        st.session_state.diary_date = datetime.date.today()
+
+    # Show past entries
     if st.session_state.diary_entries:
         st.subheader("Past Entries")
         diary_data = pd.DataFrame(st.session_state.diary_entries)
