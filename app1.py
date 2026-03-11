@@ -13,21 +13,21 @@ if page == "Home":
     st.header("An entry a day keeps the stress away. How are you doing, soldier?")
     
     quotes = [
-        '“Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle.” - Christian D. Larson',
-        '“It does not matter how slowly you go, as long as you do not stop.” - Confucius',
-        '“Study while others are sleeping; work while others are loafing; prepare while others are playing; and dream while others are wishing.” - William Arthur Ward', 
-        '“You do npt have to be great to start, but you have to start to be great.” - Zig Ziglar 
-        '“The difference between a successful person and others is not a lack of strength, not a lack of knowledge, but rather a lack of will.” - Vince Lombardi', 
-        '“You are never too old to set another goal or to dream a new dream.” - C.S. Lewis', 
-        '“Success is not the absence of failure; it is the persistence through failure.” - Aisha Tyler', 
-        '“The best way to predict your future is to create it.” - Abraham Lincoln', 
-        '“Efforts and courage are not enough without purpose and direction.” - John F. Kennedy', 
-        '“Procrastination is the thief of time.” - Edward Young', 
-        '“Real difficulties can be overcome; it is only the imaginary ones that are unconquerable.” - Theodore N. Vail', 
-        '“Nothing is impossible. The word itself says ‘I’m Possible’.” - Audrey Hepburn',
-        '“The greatest amount of wasted time is time not getting started.” - Dawson Trotman',
-        '“Work hard in silence. Let your success be your noise.” - Frank Ocean',
-        '“Education is the most powerful weapon which you can use to change the world.” - Nelson Mandela'  
+        '"Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle." - Christian D. Larson',
+        '"It does not matter how slowly you go, as long as you do not stop." - Confucius',
+        '"Study while others are sleeping; work while others are loafing; prepare while others are playing; and dream while others are wishing." - William Arthur Ward', 
+        '"You do not have to be great to start, but you have to start to be great." - Zig Ziglar',
+        '"The difference between a successful person and others is not a lack of strength, not a lack of knowledge, but rather a lack of will." - Vince Lombardi', 
+        '"You are never too old to set another goal or to dream a new dream." - C.S. Lewis', 
+        '"Success is not the absence of failure; it is the persistence through failure." - Aisha Tyler', 
+        '"The best way to predict your future is to create it." - Abraham Lincoln', 
+        '"Efforts and courage are not enough without purpose and direction." - John F. Kennedy', 
+        '"Procrastination is the thief of time." - Edward Young', 
+        '"Real difficulties can be overcome; it is only the imaginary ones that are unconquerable." - Theodore N. Vail', 
+        '"Nothing is impossible. The word itself says ‘I’m Possible’." - Audrey Hepburn',
+        '"The greatest amount of wasted time is time not getting started." - Dawson Trotman',
+        '"Work hard in silence. Let your success be your noise." - Frank Ocean',
+        '"Education is the most powerful weapon which you can use to change the world." - Nelson Mandela'  
     ]
     if st.button("Click the button below to generate a random motivational quote!"):
         st.success(random.choice(quotes))
