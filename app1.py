@@ -105,7 +105,7 @@ elif st.session_state.page == "Planner":
         st.color_picker("Highlight Color", "#00f900")
 
 # -- About Page --
-elif page == "About":
+elif st.session_state.page == "About":
     st.title("ℹ️ About this App")
     st.write("""
     Mahalaga 'to kasi bakit hindi  
