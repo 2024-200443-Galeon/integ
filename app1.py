@@ -114,6 +114,7 @@ elif st.session_state.page == "Planner":
 
         # Note for users
         st.caption("⚠️ Tip: Erase the words above to add a new entry.")
+
         if st.button("Save Task"):
             new_task = {
                 "Task": st.session_state.task_name,
@@ -129,35 +130,35 @@ elif st.session_state.page == "Planner":
             st.success("✅ Task saved!")
 
     with tab2:
-    st.header("Progress Overview")
-    if st.session_state.tasks:
-        # Header row
-        header_cols = st.columns([3, 2, 2, 2, 2])
-        header_cols[0].write("**Task**")
-        header_cols[1].write("**Deadline**")
-        header_cols[2].write("**Priority**")
-        header_cols[3].write("**Hours**")
-        header_cols[4].write("**Done**")
+        st.header("Progress Overview")
+        if st.session_state.tasks:
+            # Header row
+            header_cols = st.columns([3, 2, 2, 2, 2])
+            header_cols[0].write("**Task**")
+            header_cols[1].write("**Deadline**")
+            header_cols[2].write("**Priority**")
+            header_cols[3].write("**Hours**")
+            header_cols[4].write("**Done**")
 
-        # Task rows
-        for i, task in enumerate(st.session_state.tasks, start=1):
-            if "Done" not in task:
-                task["Done"] = False
+            # Task rows
+            for i, task in enumerate(st.session_state.tasks, start=1):
+                if "Done" not in task:
+                    task["Done"] = False
 
-            cols = st.columns([3, 2, 2, 2, 2])
-            cols[0].write(f"{i}. {task['Task']}")
-            cols[1].write(task["Deadline"])
-            cols[2].write(task["Priority"])
-            cols[3].write(f"{task['Hours']} hrs")
+                cols = st.columns([3, 2, 2, 2, 2])
+                cols[0].write(f"{i}. {task['Task']}")
+                cols[1].write(task["Deadline"])
+                cols[2].write(task["Priority"])
+                cols[3].write(f"{task['Hours']} hrs")
 
-            done_key = f"done_{i}"
-            checked = cols[4].checkbox("Done", value=task.get("Done", False), key=done_key)
-            st.session_state.tasks[i-1]["Done"] = checked
+                done_key = f"done_{i}"
+                checked = cols[4].checkbox("Done", value=task.get("Done", False), key=done_key)
+                st.session_state.tasks[i-1]["Done"] = checked
 
-        st.metric("Total Tasks", len(st.session_state.tasks))
-        st.metric("Completed", sum(1 for t in st.session_state.tasks if t.get("Done", False)))
-    else:
-        st.info("No tasks yet. Add one in the 'Add Task' tab!")
+            st.metric("Total Tasks", len(st.session_state.tasks))
+            st.metric("Completed", sum(1 for t in st.session_state.tasks if t.get("Done", False)))
+        else:
+            st.info("No tasks yet. Add one in the 'Add Task' tab!")
 
 
 # -- About Page --
