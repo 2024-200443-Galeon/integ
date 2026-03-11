@@ -104,23 +104,24 @@ elif st.session_state.page == "Planner":
 
     with tab1:
         st.header("Add a New Task")
-        task_name = st.text_input("Task name")
-        deadline = st.date_input("Deadline")
-        time = st.time_input("Time")
-        notes = st.text_area("Notes")
-        priority = st.radio("Priority", ["Low", "Medium", "High"])
-        hours = st.slider("Estimated hours", 0, 10, 1)
-        important = st.checkbox("Mark as important")
+        task_name = st.text_input("Task name", key="task_name")
+        deadline = st.date_input("Deadline", key="task_deadline")
+        time = st.time_input("Time", key="task_time")
+        notes = st.text_area("Notes", key="task_notes")
+        priority = st.radio("Priority", ["Low", "Medium", "High"], key="task_priority")
+        hours = st.slider("Estimated hours", 0, 10, 1, key="task_hours")
+        important = st.checkbox("Mark as important", key="task_important")
 
         if st.button("Save Task"):
             new_task = {
-                "Task": task_name,
-                "Deadline": str(deadline),
-                "Time": str(time),
-                "Notes": notes,
-                "Priority": priority,
-                "Hours": hours,
-                "Important": important
+                "Task": st.session_state.task_name,
+                "Deadline": str(st.session_state.task_deadline),
+                "Time": str(st.session_state.task_time),
+                "Notes": st.session_state.task_notes,
+                "Priority": st.session_state.task_priority,
+                "Hours": st.session_state.task_hours,
+                "Important": st.session_state.task_important,
+                "Done": False  # default status
             }
             st.session_state.tasks.append(new_task)
             st.success("✅ Task saved!")
@@ -128,10 +129,21 @@ elif st.session_state.page == "Planner":
     with tab2:
         st.header("Progress Overview")
         if st.session_state.tasks:
-            task_data = pd.DataFrame(st.session_state.tasks)
-            task_data.index = task_data.index + 1  # start numbering at 1
-            st.dataframe(task_data)
+            for i, task in enumerate(st.session_state.tasks, start=1):
+                cols = st.columns([3, 2, 2, 2, 2])  # layout per row
+                cols[0].write(f"{i}. {task['Task']}")
+                cols[1].write(task["Deadline"])
+                cols[2].write(task["Priority"])
+                cols[3].write(f"{task['Hours']} hrs")
+                # Checkbox to mark as done
+                done_key = f"done_{i}"
+                if cols[4].checkbox("Done", value=task["Done"], key=done_key):
+                    st.session_state.tasks[i-1]["Done"] = True
+                else:
+                    st.session_state.tasks[i-1]["Done"] = False
+
             st.metric("Total Tasks", len(st.session_state.tasks))
+            st.metric("Completed", sum(1 for t in st.session_state.tasks if t["Done"]))
         else:
             st.info("No tasks yet. Add one in the 'Add Task' tab!")
 
