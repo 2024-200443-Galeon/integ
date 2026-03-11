@@ -10,7 +10,9 @@ page = st.sidebar.radio("Go to:", ["Home","Diary", "Planner", "About"])
 # -- Home Page --
 if page == "Home":
     st.title("🎓 Welcome to the Student Planner App 🎓")
-    st.subheader("✨ An entry a day keeps the stress away ✨")
+    st.subheader("✨ Every entry is a step forward ✨")
+
+    st.divider()  # separator line
 
     quotes = [
         '"Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle." - Christian D. Larson',
@@ -30,19 +32,24 @@ if page == "Home":
         '"Education is the most powerful weapon which you can use to change the world." - Nelson Mandela'
     ]
 
-    # Layout with two columns
-    col1, col2 = st.columns([2,1])
+     if st.button("✨ Inspire Me!"):
+        st.markdown(f"> ✨ *{random.choice(quotes)}*")
+
+    st.divider()
+
+    # Quick Links Section
+    st.header("📌 Quick Links")
+    col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.header("💡 Random Quote of the Day 💡")
-        if st.button("✨ Inspire Me! ✨"):
-            st.info(random.choice(quotes))
-
+        if st.button("📖 Diary 📖"):
+            page = "Diary"
     with col2:
-        st.header("📌 Quick Links")
-        st.write("📖 Go to Diary")
-        st.write("📅 Go to Planner")
-        st.write("ℹ️ About this App")
+        if st.button("📅 Planner 📅"):
+            page = "Planner"
+    with col3:
+        if st.button("ℹ️ About ℹ️"):
+            page = "About"
 
 
 # -- Diary Page --
