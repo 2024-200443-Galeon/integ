@@ -123,6 +123,52 @@ elif st.session_state.page == "Planner":
         st.number_input("Daily study goal (hours)", min_value=0, max_value=24, value=2)
         st.color_picker("Highlight Color", "#00f900")
 
+
+# -- Planner Page --
+elif st.session_state.page == "Planner":
+    st.title("📅 Student Planner")
+
+    # Initialize task storage
+    if "tasks" not in st.session_state:
+        st.session_state.tasks = []
+
+    # Tabs for planner features
+    tab1, tab2 = st.tabs(["Add Task", "View Progress"])
+
+    with tab1:
+        st.header("Add a New Task")
+        task_name = st.text_input("Task name")
+        deadline = st.date_input("Deadline")
+        time = st.time_input("Time")
+        notes = st.text_area("Notes")
+        priority = st.radio("Priority", ["Low", "Medium", "High"])
+        hours = st.slider("Estimated hours", 0, 10, 1)
+        important = st.checkbox("Mark as important")
+
+        if st.button("Save Task"):
+            new_task = {
+                "Task": task_name,
+                "Deadline": str(deadline),
+                "Time": str(time),
+                "Notes": notes,
+                "Priority": priority,
+                "Hours": hours,
+                "Important": important
+            }
+            st.session_state.tasks.append(new_task)
+            st.success("✅ Task saved!")
+
+    with tab2:
+        st.header("Progress Overview")
+        if st.session_state.tasks:
+            task_data = pd.DataFrame(st.session_state.tasks)
+            task_data.index = task_data.index + 1  # start numbering at 1
+            st.dataframe(task_data)
+            st.metric("Total Tasks", len(st.session_state.tasks))
+        else:
+            st.info("No tasks yet. Add one in the 'Add Task' tab!")
+
+
 # -- About Page --
 elif st.session_state.page == "About":
     st.title("ℹ️ About this App")
