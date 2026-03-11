@@ -45,13 +45,13 @@ if st.session_state.page == "Home":
 
     with col1:
         if st.button("📖 Diary 📖"):
-            page = "Diary"
+            st.session_state.page = "Diary"
     with col2:
         if st.button("📅 Planner 📅"):
-            page = "Planner"
+            st.session_state.page = "Planner"
     with col3:
         if st.button("ℹ️ About ℹ️"):
-            page = "About"
+            st.session_state.page = "About"
 
 
 # -- Diary Page --
