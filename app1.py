@@ -125,7 +125,9 @@ elif st.session_state.page == "Planner":
             }
             st.session_state.tasks.append(new_task)
             st.success("✅ Task saved!")
-
+            # Note for users
+            st.caption("⚠️ Tip: Erase the words above to add a new entry.")
+            
     with tab2:
         st.header("Progress Overview")
         if st.session_state.tasks:
