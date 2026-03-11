@@ -56,47 +56,50 @@ if st.session_state.page == "Home":
 
 
 # -- Diary Page --
-# Initialize diary storage
-if "diary_entries" not in st.session_state:
-    st.session_state.diary_entries = []
+elif st.session_state.page == "Diary":
+    st.title("📖 Daily Diary 📖")
 
-# Initialize form state only if not yet set
-for key, default in {
-    "diary_title": "",
-    "diary_entry": "",
-    "diary_date": datetime.date.today()
-}.items():
-    if key not in st.session_state:
-        st.session_state[key] = default
+    # Initialize diary storage
+    if "diary_entries" not in st.session_state:
+        st.session_state.diary_entries = []
 
-# Inputs bound to session_state
-title = st.text_input("Diary Title", value=st.session_state.diary_title, key="diary_title")
-date = st.date_input("Entry Date", value=st.session_state.diary_date, key="diary_date")
-entry = st.text_area("Write your diary entry here:", value=st.session_state.diary_entry, key="diary_entry")
+    # Initialize form state only if not yet set
+    for key, default in {
+        "diary_title": "",
+        "diary_entry": "",
+        "diary_date": datetime.date.today()
+    }.items():
+        if key not in st.session_state:
+            st.session_state[key] = default
 
-# Save button
-if st.button("Save Entry"):
-    new_entry = {
-        "Date": str(date),
-        "Title": title,
-        "Entry": entry
-    }
-    st.session_state.diary_entries.append(new_entry)
-    st.success("✅ Entry saved!")
+    # Inputs bound to session_state
+    title = st.text_input("Diary Title", value=st.session_state.diary_title, key="diary_title")
+    date = st.date_input("Entry Date", value=st.session_state.diary_date, key="diary_date")
+    entry = st.text_area("Write your diary entry here:", value=st.session_state.diary_entry, key="diary_entry")
 
-# Create new entry button (resets fields)
-if st.button("➕ Create New Entry"):
-    st.session_state.diary_title = ""
-    st.session_state.diary_entry = ""
-    st.session_state.diary_date = datetime.date.today()
+    # Save button
+    if st.button("Save Entry"):
+        new_entry = {
+            "Date": str(date),
+            "Title": title,
+            "Entry": entry
+        }
+        st.session_state.diary_entries.append(new_entry)
+        st.success("✅ Entry saved!")
 
-# Show past entries
-if st.session_state.diary_entries:
-    st.subheader("Past Entries")
-    diary_data = pd.DataFrame(st.session_state.diary_entries)
-    st.dataframe(diary_data)
-else:
-    st.info("No diary entries yet. Start writing! 😎")
+    # Create new entry button (resets fields)
+    if st.button("➕ Create New Entry"):
+        st.session_state.diary_title = ""
+        st.session_state.diary_entry = ""
+        st.session_state.diary_date = datetime.date.today()
+
+    # Show past entries
+    if st.session_state.diary_entries:
+        st.subheader("Past Entries")
+        diary_data = pd.DataFrame(st.session_state.diary_entries)
+        st.dataframe(diary_data)
+    else:
+        st.info("No diary entries yet. Start writing! 😎")
 
 
 # -- Planner Page --
