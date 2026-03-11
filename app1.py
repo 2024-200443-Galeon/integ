@@ -128,11 +128,11 @@ elif st.session_state.page == "Planner":
 
     with tab2:
         st.header("Progress Overview")
-            if st.session_state.tasks:
-                for i, task in enumerate(st.session_state.tasks, start=1):
-                # make sure every task has a "Done" field
-                if "Done" not in task:
-                    task["Done"] = False
+        if st.session_state.tasks:
+            for i, task in enumerate(st.session_state.tasks, start=1):
+            # make sure every task has a "Done" field
+            if "Done" not in task:
+                task["Done"] = False
 
                 cols = st.columns([3, 2, 2, 2, 2])  # layout per row
                 cols[0].write(f"{i}. {task['Task']}")
