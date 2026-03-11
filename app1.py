@@ -31,8 +31,7 @@ if page == "Home":
         '"Work hard in silence. Let your success be your noise." - Frank Ocean',
         '"Education is the most powerful weapon which you can use to change the world." - Nelson Mandela'
     ]
-
-     if st.button("✨ Inspire Me!"):
+    if st.button("✨ Inspire Me!"):
         st.markdown(f"> ✨ *{random.choice(quotes)}*")
 
     st.divider()
