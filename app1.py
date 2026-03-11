@@ -16,7 +16,7 @@ st.session_state.page = st.sidebar.radio(
 # -- Home Page --
 if st.session_state.page == "Home":
     st.title("🎓 Welcome to the Student Planner App 🎓")
-    st.subheader("✨ Every entry is a step forward ✨")
+    st.subheader("✨ Where every entry is a step forward ✨")
 
     st.divider()  # separator line
 
@@ -158,12 +158,23 @@ elif st.session_state.page == "Planner":
             st.metric("Total Tasks", len(st.session_state.tasks))
             st.metric("Completed", sum(1 for t in st.session_state.tasks if t.get("Done", False)))
         else:
-            st.info("No tasks yet. Add one in the 'Add Task' tab!")
+            st.info("No tasks yet. Add one in the 'Add Task' tab! 😎")
 
 
 # -- About Page --
 elif st.session_state.page == "About":
-    st.title("ℹ️ About this App")
+    st.title("ℹ️ About this App ℹ️")
     st.write("""
-    Mahalaga 'to kasi bakit hindi  
+        About the Student Planner App
+        The Student Planner App is an all‑in‑one diary and planner designed to help students organize their school life and reflect on their daily experiences. It combines a personal diary with a task manager, plus motivational quotes to brighten up the day.
+            - Use‑case: The app supports both emotional well‑being (through diary entries) and academic productivity (through task planning and progress tracking).
+            - Target users: Students who want a simple, interactive way to record their thoughts, track assignments, and monitor progress.
+        '''
+        - Inputs collected -
+            - Diary: Title, entry date, and diary content.
+            - Planner: Task name, deadline, time, notes, priority level, estimated hours, and importance marker.
+        '''
+        - Outputs shown -
+            - Diary: Saved entries displayed in a table under “Past Entries.”
+            - Planner: Tasks listed in the “View Progress” tab with checkboxes to mark completion, plus counters for total and completed tasks.
     """)
