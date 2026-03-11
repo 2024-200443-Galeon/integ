@@ -58,7 +58,7 @@ if st.session_state.page == "Home":
 
 
 # -- Diary Page --
-if st.session_state.page == "Diary":
+elif st.session_state.page == "Diary":
     st.title("📖 Daily Diary 📖")
     st.text_input("Diary Title")
     st.date_input("Entry Date", datetime.date.today())
