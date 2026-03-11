@@ -126,9 +126,9 @@ elif st.session_state.page == "Planner":
             st.session_state.tasks.append(new_task)
             st.success("✅ Task saved!")
 
-   with tab2:
-    st.header("Progress Overview")
-    if st.session_state.tasks:
+    with tab2:
+        st.header("Progress Overview")
+        if st.session_state.tasks:
         for i, task in enumerate(st.session_state.tasks, start=1):
             # make sure every task has a "Done" field
             if "Done" not in task:
