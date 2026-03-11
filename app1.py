@@ -38,7 +38,7 @@ if st.session_state.page == "Home":
         '"Education is the most powerful weapon which you can use to change the world." - Nelson Mandela'
     ]
     if st.button("✨ Inspire Me!"):
-        st.markdown(f"> ✨ *{random.choice(quotes)}*")
+        st.markdown(f"> ✨ *{random.choice(quotes)}* ✨")
 
     st.divider()
 
@@ -46,15 +46,15 @@ if st.session_state.page == "Home":
     st.header("📌 Quick Links")
     col1, col2, col3 = st.columns(3)
 
-    with col1:
-        if st.button("📖 Diary 📖"):
-            st.session_state.page = "Diary"
-    with col2:
-        if st.button("📅 Planner 📅"):
-            st.session_state.page = "Planner"
-    with col3:
-        if st.button("ℹ️ About ℹ️"):
-            st.session_state.page = "About"
+    if col1.button("📖 Diary 📖"):
+        st.session_state.page = "Diary"
+        st.experimental_rerun()  # Refresh to update page state
+    if col2.button("📅 Planner 📅"):
+        st.session_state.page = "Planner"
+        st.experimental_rerun()  # Refresh to update page state
+    if col3.button("ℹ️ About ℹ️"):
+        st.session_state.page = "About"
+        st.experimental_rerun()  # Refresh to update page state
 
 
 # -- Diary Page --
