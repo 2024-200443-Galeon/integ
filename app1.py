@@ -126,26 +126,29 @@ elif st.session_state.page == "Planner":
             st.session_state.tasks.append(new_task)
             st.success("✅ Task saved!")
 
-    with tab2:
-        st.header("Progress Overview")
-        if st.session_state.tasks:
-            for i, task in enumerate(st.session_state.tasks, start=1):
-                cols = st.columns([3, 2, 2, 2, 2])  # layout per row
-                cols[0].write(f"{i}. {task['Task']}")
-                cols[1].write(task["Deadline"])
-                cols[2].write(task["Priority"])
-                cols[3].write(f"{task['Hours']} hrs")
-                # Checkbox to mark as done
-                done_key = f"done_{i}"
-                if cols[4].checkbox("Done", value=task["Done"], key=done_key):
-                    st.session_state.tasks[i-1]["Done"] = True
-                else:
-                    st.session_state.tasks[i-1]["Done"] = False
+   with tab2:
+    st.header("Progress Overview")
+    if st.session_state.tasks:
+        for i, task in enumerate(st.session_state.tasks, start=1):
+            # make sure every task has a "Done" field
+            if "Done" not in task:
+                task["Done"] = False
 
-            st.metric("Total Tasks", len(st.session_state.tasks))
-            st.metric("Completed", sum(1 for t in st.session_state.tasks if t["Done"]))
-        else:
-            st.info("No tasks yet. Add one in the 'Add Task' tab!")
+            cols = st.columns([3, 2, 2, 2, 2])  # layout per row
+            cols[0].write(f"{i}. {task['Task']}")
+            cols[1].write(task["Deadline"])
+            cols[2].write(task["Priority"])
+            cols[3].write(f"{task['Hours']} hrs")
+
+            # Checkbox to mark as done (safe access)
+            done_key = f"done_{i}"
+            checked = cols[4].checkbox("Done", value=task.get("Done", False), key=done_key)
+            st.session_state.tasks[i-1]["Done"] = checked
+
+        st.metric("Total Tasks", len(st.session_state.tasks))
+        st.metric("Completed", sum(1 for t in st.session_state.tasks if t.get("Done", False)))
+    else:
+        st.info("No tasks yet. Add one in the 'Add Task' tab!")
 
 
 # -- About Page --
