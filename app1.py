@@ -44,6 +44,7 @@ if st.session_state.page == "Home":
 
     # Quick Links Section
     st.header("📌 Quick Links")
+    st.caption("⚠️ Tip: Quick Links may need a second click to fully load the page.")
     col1, col2, col3 = st.columns(3)
 
     if col1.button("📖 Diary 📖"):
