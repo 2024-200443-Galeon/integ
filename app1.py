@@ -48,13 +48,10 @@ if st.session_state.page == "Home":
 
     if col1.button("📖 Diary 📖"):
         st.session_state.page = "Diary"
-        st.experimental_rerun()  # Refresh to update page state
     if col2.button("📅 Planner 📅"):
         st.session_state.page = "Planner"
-        st.experimental_rerun()  # Refresh to update page state
     if col3.button("ℹ️ About ℹ️"):
         st.session_state.page = "About"
-        st.experimental_rerun()  # Refresh to update page state
 
 
 # -- Diary Page --
