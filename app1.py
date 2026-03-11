@@ -128,17 +128,17 @@ elif st.session_state.page == "Planner":
 
     with tab2:
         st.header("Progress Overview")
-        if st.session_state.tasks:
-        for i, task in enumerate(st.session_state.tasks, start=1):
-            # make sure every task has a "Done" field
-            if "Done" not in task:
-                task["Done"] = False
+            if st.session_state.tasks:
+                for i, task in enumerate(st.session_state.tasks, start=1):
+                # make sure every task has a "Done" field
+                if "Done" not in task:
+                    task["Done"] = False
 
-            cols = st.columns([3, 2, 2, 2, 2])  # layout per row
-            cols[0].write(f"{i}. {task['Task']}")
-            cols[1].write(task["Deadline"])
-            cols[2].write(task["Priority"])
-            cols[3].write(f"{task['Hours']} hrs")
+                cols = st.columns([3, 2, 2, 2, 2])  # layout per row
+                cols[0].write(f"{i}. {task['Task']}")
+                cols[1].write(task["Deadline"])
+                cols[2].write(task["Priority"])
+                cols[3].write(f"{task['Hours']} hrs")
 
             # Checkbox to mark as done (safe access)
             done_key = f"done_{i}"
